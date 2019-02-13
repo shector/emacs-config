@@ -75,8 +75,10 @@
 (require 'auto-complete)
 (global-auto-complete-mode t)
 
-;; 
+;; M-x helm swoop, search lines across buffers
 (global-set-key (kbd "M-f") 'helm-swoop)
+
+;; file finder similar to grep (fuzzy matching through directory)
 (global-set-key (kbd "M-p") 'fiplr-find-file)
 
 ;; saves backup files to a single locaton

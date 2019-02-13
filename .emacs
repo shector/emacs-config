@@ -11,6 +11,7 @@
  ;; If there is more than one, they won't work right.
  )
 
+;; allow for mepla
 (require 'package)
 (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
                     (not (gnutls-available-p))))
@@ -25,9 +26,11 @@
              '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
+;; start empty session on dashboard
 (require 'dashboard)
 (dashboard-setup-startup-hook)
 
+;; set size of window
 (if (display-graphic-p)
     (progn
       (setq initial-frame-alist
@@ -48,30 +51,34 @@
     (setq initial-frame-alist '( (tool-bar-lines . 0)))
     (setq default-frame-alist '( (tool-bar-lines . 0)))))
 
+;; another matching engine
 (require 'flx-ido)
 (ido-mode 1)
 (ido-everywhere 1)
 (flx-ido-mode 1)
 
-
+;; M-x wttrin
 (setq wttrin-default-cities '("Charlottesville"))
 (setq wttrin-default-accept-language '("Accept-Language" . "en-US"))
 
+;; automatically loads beautiful theme, file tree, and rainbow delimiters
 (load-theme 'cyberpunk t)
-
 (add-hook 'after-init-hook #'neotree-toggle)
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
+;; supposed to set tabs to two spaces iffy on certain file types
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 2)
 (setq indent-line-function 'insert-tab)
 
-
+;; autocomplete on startup
 (require 'auto-complete)
 (global-auto-complete-mode t)
 
+;; 
 (global-set-key (kbd "M-f") 'helm-swoop)
 (global-set-key (kbd "M-p") 'fiplr-find-file)
 
+;; saves backup files to a single locaton
+(setq backup-directory-alist `(("." . "~/.saves")))
 
-   
